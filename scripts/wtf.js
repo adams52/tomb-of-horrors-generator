@@ -63,7 +63,7 @@ var WTF = (function() {
     /*
       ------------------------------------------------------------
 
-        Converts JSON data to a regular humans object
+        Converts JSON data to a regular corpus object
         @see sample.json
 
       ------------------------------------------------------------
@@ -112,9 +112,15 @@ var WTF = (function() {
 
         dom = {
             //generate: $( '#generate' ),
-            output: $( '#output' )
+            output: $( '.output' )
         };
-
+		
+		$( ".output" ).each(function() {
+			$( this ).hide();
+		});
+		
+		$("#tabaxiList").show();
+		$("#showTabaxi").addClass("active");
         /*dom.generate.click( function() {
             generate();
             return false;
@@ -122,41 +128,9 @@ var WTF = (function() {
     }
 
     function generate() {
-        var type, text, part, iter = 0, // Safety mechanism
-			firstName,
-			dynasticName,
-			humanAge,
-			humanAppearance;
-			var table = $("#humans").find("tbody");
-			
-			for (var x = 0; x < 10; x++) {
-				table.append("<tr id='humans" + x + "'>")
-				var row = $("#humans" + x); 
-				var npc = getNPCData();
-				firstName = randomItem( humans.firstname );
-				dynasticName = randomItem(humans.dynasticname);
-				humanAge = randomItem(humans.age);
-				humanAppearance = randomItem(humans.appearance);
-				
-				row.append("<td>" + firstName + "</td>");
-				row.append("<td>" + dynasticName + "</td>");
-				row.append("<td>" + npc["occupation"] + "</td>");
-				row.append("<td>" + humanAppearance + "</td>");
-				row.append("<td>" + humanAge + "</td>");
-				row.append("<td>" + npc["highability"] + "</td>");
-				row.append("<td>" + npc["lowability"] + "</td>");
-				row.append("<td>" + npc["talent"] + "</td>");
-				row.append("<td>" + npc["mannerism"] + "</td>");
-				row.append("<td>" + npc["interactions"] + "</td>");
-				row.append("<td>" + npc["ideal"] + "</td>");
-				row.append("<td>" + npc["bond"] + "</td>");
-				row.append("<td>" + npc["flaw"] + "</td>");
-				row.append("<td>" + npc["knowledge"] + "</td>");
-				row.append("<td>" + npc["knowledge"] + "</td>");
-			}
-
-        // Toggle animation
-
+        generateHumanTable(humans, npcData);
+		generateTabaxiTable(tabaxiData, npcData);
+		generateDwarfTable(dwarfData, npcData);
         setTimeout( showOutput, 0 );
         hideOutput();
     }
@@ -170,35 +144,8 @@ var WTF = (function() {
 
         dom.output.addClass( 'animate' ).css( 'opacity', 1 );
     }
-
-    function randomItem( list, remove ) {
-
-        var index = ~~( Math.random() * list.length );
-        var item = list[ index ];
-
-        if ( remove )
-
-            list.splice( index, 1 );
-
-        return item;
-    }
 	
-	function getNPCData() {
-		var npc = {};
-		npc["occupation"] = randomItem(npcData.occupationhistory);
-		npc["appearance"] = randomItem(npcData.appearance);
-		npc["highability"] = randomItem(npcData.highability);
-		npc["lowability"] = randomItem(npcData.lowability);
-		npc["talent"] = randomItem(npcData.talent);
-		npc["mannerism"] = randomItem(npcData.mannerism);
-		npc["interactions"] = randomItem(npcData.interactionswithothers);
-		npc["knowledge"] = randomItem(npcData.usefulknowledge);
-		npc["ideal"] = randomItem(npcData.ideal);
-		npc["bond"] = randomItem(npcData.bond);
-		npc["flaworsecret"] = randomItem(npcData.flaworsecret);
-		
-		return npc;
-	}
+	
 
     /*
       ------------------------------------------------------------
@@ -308,9 +255,6 @@ var WTF = (function() {
 				start();
 			})
         },
-
-        // Expose certain methods
-        //generate: generate
     };
 
 })();

@@ -7,34 +7,29 @@
 		<link rel="stylesheet" href="styles/main.css" />
 	</head>
 	<body>
-		<div id="wrapper" >
-		   
+		<div id="menu">
+			<ul>
+				<li><a id="showHumans" href="#" onclick="show(this, 'humansList');">Humans</a></li>
+				<li><a id="showDwarves" href="#" onclick="show(this, 'dwarvesList');">Dwarves</a></li>
+				<li><a id="showTabaxi" href="#" onclick="show(this, 'tabaxiList');">Tabaxi</a></li>
+			</ul>
 		</div>
-		<div id="output">
-			<table id="humans">
-				<thead>
-					<th>Name</th>
-					<th>Dynastic Name</th>
-					<th>Occupation or Affiliation</th>	
-					<th>Appearance</th>	
-					<th>Age</th>	
-					<th>Ability: High</th>	
-					<th>Ability: Low</th>	
-					<th>Talent</th>	
-					<th>Mannerism</th>	
-					<th>Interaction with Other(s)</th>	
-					<th>Ideal</th>	
-					<th>Bond</th>	
-					<th>Flaw or Secret</th>	
-					<th>Has Knowledge of</th>	
-					<th>Has history with</th>
-				</thead>
-				<tbody>
-					
-				</tbody>
+		<div id="humansList" class="output">
+			
+		</div>
+		<div id="dwarvesList" class="output">
+			
+		</div>
+		<div id="tabaxiList" class="output">
+		
+		</div>
+		<div id="testing">
+		
 		</div>
 		<script>window.Zepto || document.write('<script src="scripts/vendor/zepto.min.js"><\/script>')</script>
+		<script src="scripts/generateTables.js"></script>
 		<script src="scripts/wtf.js"></script>
 		<script src="scripts/main.js"></script>
+		
 	</body>
 </html>
