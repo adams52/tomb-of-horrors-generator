@@ -1,3 +1,15 @@
+function show(el, id) {
+	$( ".output" ).each(function() {
+		$( this ).hide();
+	});
+	
+	$( "li a" ).each(function() {
+		$(this).removeClass("active");
+	});
+	
+	$(el).addClass("active");
+	$("#" + id).show();
+}
 
 var WTF = (function() {
 
@@ -146,7 +158,6 @@ var WTF = (function() {
 
         dom.output.addClass( 'animate' ).css( 'opacity', 1 );
     }
-	
 	
 
     /*
