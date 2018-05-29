@@ -116,6 +116,98 @@ function generateTabaxiTable(tabaxi, npcData) {
 	$("#tabaxiList").append(table);
 }
 
+function generateTortleTable(tortles, npcData) {
+	$("#tortlesList").empty();
+				
+	var columnHeaders = ["Name", "Appearance", "Role", "Age",  
+		"Ability: High", "Ability: Low", "Talent", "Mannerism", "Interaction with Other(s)", "Ideal",
+		"Bond", "Flaw or Secret", "Has Knowledge of", "Has history with"];
+	
+	var table = generateTable("tortles", columnHeaders);
+	var tableBody = $(table).find("tbody");
+	var row;
+	var tortle;
+	for (var x = 0; x < 10; x++) {
+		tableBody.append("<tr id='tortles" + x + "'>")
+		row = $(tableBody).find("#tortles" + x); 
+		tortle = getNPC(tortles, npcData);
+		
+		row.append("<td>" + tortle["firstname"] + "</td>");
+		row.append("<td>" + tortle["appearance"] + "</td>");
+		row.append("<td>" + tortle["role"] + "</td>");
+		row.append("<td>" + tortle["age"] + "</td>");
+		row.append("<td>" + tortle["abilityhigh"] + "</td>");
+		row.append("<td>" + tortle["abilitylow"] + "</td>");
+		row.append("<td>" + tortle["talent"] + "</td>");
+		row.append("<td>" + tortle["mannerism"] + "</td>");
+		row.append("<td>" + tortle["interactions"] + "</td>");
+		row.append("<td>" + tortle["ideal"] + "</td>");
+		row.append("<td>" + tortle["bond"] + "</td>");
+		row.append("<td>" + tortle["flaworsecret"] + "</td>");
+		row.append("<td>" + tortle["knowledge"] + "</td>");
+		row.append("<td>" + tortle["history"] + "</td>");
+	}
+	$("#tortlesList").append(table);
+}
+
+function generateBatiriTable(batiris, npcData) {
+	$("#batirisList").empty();
+	
+	var columnHeaders = ["Name", "Role", "Clan", "Age", "Look", "Trait", "Trait2", "Knows about or has history with"];
+	
+	var table = generateTable("batiris", columnHeaders);
+	var tableBody = $(table).find("tbody");
+	var regex = buildRexExp(batiris);
+	for (var x = 0; x < 10; x++) {
+		tableBody.append("<tr id='batiris" + x + "'>")
+		var row = $(tableBody).find("#batiris" + x); 
+		var batiri = getNPC(batiris, npcData);
+		
+		var item = populateTemplate(batiri, "name");
+		
+		row.append("<td>" + item + "</td>");
+		row.append("<td>" + batiri["role"] + "</td>");
+		row.append("<td>" + batiri["clan"] + "</td>");
+		row.append("<td>" + batiri["age"] + "</td>");
+		row.append("<td>" + batiri["appearance"] + "</td>");
+		row.append("<td>" + batiri["personality1"] + "</td>");
+		row.append("<td>" + batiri["personality2"] + "</td>");
+		row.append("<td>" + batiri["history"] + "</td>");
+	}
+	$("#batirisList").append(table);
+}
+
+function populateTemplate(corpus, templateColumn) {
+	
+	var chosen = corpus[templateColumn];
+	
+	if (chosen != null && chosen.startsWith("template:")) {
+		var idea = chosen.substring(9).trim();
+		var regex = buildRexExp(corpus);
+
+		var item = regex.exec(idea);
+
+
+
+		var type, text, part, iter = 0;
+		while ( item && ++iter < 1000 ) {
+
+			type = item[ 0 ];
+			text = item[ 1 ];
+
+			part = corpus[text];
+			idea = idea.replace( type, part );
+
+			regex.lastIndex = 0;
+			item = regex.exec( idea );
+		}
+		
+		chosen = idea;
+	}
+
+	return chosen;
+}
+
 function generateTable(id, columnHeaders) {
 	var table = $("<table id='" + id + "'></table>");
 	
@@ -167,10 +259,31 @@ function getNPCData(npcData) {
 	return npc;
 }
 
-function randomItem( list ) {
+function randomItem( list) {
 	
 	var index = ~~( Math.random() * list.length );
 	var item = list[ index ];
 
 	return item;
+}
+
+function buildRexExp(corpus) {
+
+	var types = [];
+
+	for ( var type in corpus )
+
+		types.push( type );
+
+	types = types.sort(function (a, b) {
+		if (a.length == b.length) {
+			return 0
+		}
+		return a.length > b.length ? -1 : 1
+	})
+	
+	var content = '@(type)'.replace( 'type', types.join( '|' ) );
+
+	regex = new RegExp( content, 'gi' );
+	return regex;
 }

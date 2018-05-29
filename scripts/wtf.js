@@ -119,8 +119,8 @@ var WTF = (function() {
 			$( this ).hide();
 		});
 		
-		$("#tabaxiList").show();
-		$("#showTabaxi").addClass("active");
+		$("#batirisList").show();
+		$("#showBatiris").addClass("active");
         /*dom.generate.click( function() {
             generate();
             return false;
@@ -131,6 +131,8 @@ var WTF = (function() {
         generateHumanTable(humans, npcData);
 		generateTabaxiTable(tabaxiData, npcData);
 		generateDwarfTable(dwarfData, npcData);
+		generateTortleTable(tortleData, npcData);
+		generateBatiriTable(batiriData, npcData);
         setTimeout( showOutput, 0 );
         hideOutput();
     }
