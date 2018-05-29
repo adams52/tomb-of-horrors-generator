@@ -109,37 +109,18 @@ function generateTortleTable(tortles, npcData) {
 	var columnHeaders = ["Name", "Appearance", "Role", "Age",  
 		"Ability: High", "Ability: Low", "Talent", "Mannerism", "Interaction with Other(s)", "Ideal",
 		"Bond", "Flaw or Secret", "Has Knowledge of", "Has history with"];
+	var rowItems = ["firstname", "appearance", "role", "age", "abilityhigh", "abilitylow", "talent", 
+		"mannerism", "interactions", "ideal", "bond", "flaworsecret", "knowledge", "history"];
 	
 	var table = generateTableAndHeaders("tortles", columnHeaders);
 	var tableBody = $(table).find("tbody");
-	var row;
-	var tortle;
-	for (var x = 0; x < 10; x++) {
-		tableBody.append("<tr id='tortles" + x + "'>")
-		row = $(tableBody).find("#tortles" + x); 
-		tortle = getNPC(tortles, npcData);
-		
-		row.append("<td>" + tortle["firstname"] + "</td>");
-		row.append("<td>" + tortle["appearance"] + "</td>");
-		row.append("<td>" + tortle["role"] + "</td>");
-		row.append("<td>" + tortle["age"] + "</td>");
-		row.append("<td>" + tortle["abilityhigh"] + "</td>");
-		row.append("<td>" + tortle["abilitylow"] + "</td>");
-		row.append("<td>" + tortle["talent"] + "</td>");
-		row.append("<td>" + tortle["mannerism"] + "</td>");
-		row.append("<td>" + tortle["interactions"] + "</td>");
-		row.append("<td>" + tortle["ideal"] + "</td>");
-		row.append("<td>" + tortle["bond"] + "</td>");
-		row.append("<td>" + tortle["flaworsecret"] + "</td>");
-		row.append("<td>" + tortle["knowledge"] + "</td>");
-		row.append("<td>" + tortle["history"] + "</td>");
-	}
+	generateTableRows(10, tableBody, rowItems, tortles, npcData, "tortles");
 	$("#tortlesList").append(table);
 }
 
 function generateBatiriTable(batiris, npcData) {
 	$("#batirisList").empty();
-	//numRows, tableBody, itemList
+	
 	var columnHeaders = ["Name", "Role", "Clan", "Age", "Look", "Trait", "Trait2", "Knows about or has history with"];
 	var rowItems = ["name", "role", "clan", "age", "appearance", "personality1", "personality2", "history"];
 	
