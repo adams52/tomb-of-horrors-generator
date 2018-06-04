@@ -25,7 +25,6 @@ var WTF = (function() {
 
     var RE_QUOTE = /\"([^\"]+)\"/gi;
     var RE_JSON = /\.json$/i;
-    var RE_COL = /^gsx\$(.+)$/i;
     var RE_KEY = /[a-z0-9_-]{32,}/i;
     var HUMANS_DATA = "https://spreadsheets.google.com/feeds/list/{key}/1/public/values?alt=json";
 	var DWARF_DATA = "https://spreadsheets.google.com/feeds/list/{key}/2/public/values?alt=json";
@@ -37,13 +36,6 @@ var WTF = (function() {
 	var NPC_DATA = "https://spreadsheets.google.com/feeds/list/{key}/8/public/values?alt=json";
 	var ATMOSPHERE_DATA = "https://spreadsheets.google.com/feeds/list/{key}/9/public/values?alt=json";
 
-
-    var firstname;
-    var dynasticname;
-    var race;
-	var role;
-	var age;
-	var appearance;
     var humans;
 	var dwarfData;
 	var tabaxiData;
@@ -53,7 +45,6 @@ var WTF = (function() {
 	var rollData;
 	var npcData;
 	var atmosphereData;
-    var regex;
     var dom;
 
     /*
@@ -70,44 +61,6 @@ var WTF = (function() {
 
         initUI();
         generate();
-    }
-
-    /*
-      ------------------------------------------------------------
-
-        Converts JSON data to a regular corpus object
-        @see sample.json
-
-      ------------------------------------------------------------
-    */
-
-    function parseJSON( json ) {
-
-        var i, n, key, val, map = {}, keys = {}, data = {}, rows = json.feed.entry;
-
-        for ( key in rows[0] ) {
-            if ( RE_COL.test( key ) ) {
-                map[ key ] = key.match( RE_COL )[ 1 ].toLowerCase();
-                keys[ key ] = [];
-            }
-        }
-
-        for ( key in keys ) {
-            
-            data[ map[ key ] ] = keys[ key ];
-
-            for ( i = 0, n = rows.length; i < n; i++ ) {
-
-                val = rows[ i ][ key ].$t;
-
-                if ( val && val.length ) {
-
-                    keys[ key ].push( val );
-                }
-            }
-        }
-
-        return data;
     }
 
     /*
@@ -131,8 +84,8 @@ var WTF = (function() {
 			$( this ).hide();
 		});
 		
-		$("#batirisList").show();
-		$("#showBatiris").addClass("active");
+		$("#mainScreen").show();
+		$("#showMainScreen").addClass("active");
         /*dom.generate.click( function() {
             generate();
             return false;
@@ -140,11 +93,13 @@ var WTF = (function() {
     }
 
     function generate() {
+		generateMainScreen(rollData, atmosphereData);
         generateHumanTable(humans, npcData);
 		generateTabaxiTable(tabaxiData, npcData);
 		generateDwarfTable(dwarfData, npcData);
 		generateTortleTable(tortleData, npcData);
 		generateBatiriTable(batiriData, npcData);
+		generateGrungTable(grungData, npcData);
         setTimeout( showOutput, 0 );
         hideOutput();
     }

@@ -9,12 +9,113 @@
 	<body>
 		<div id="menu">
 			<ul>
+				<li><a id="showMainScreen" href="#" onclick="show(this, 'mainScreen');">Main Data</a></li>
 				<li><a id="showHumans" href="#" onclick="show(this, 'humansList');">Humans</a></li>
 				<li><a id="showDwarves" href="#" onclick="show(this, 'dwarvesList');">Dwarves</a></li>
 				<li><a id="showTabaxi" href="#" onclick="show(this, 'tabaxiList');">Tabaxi</a></li>
 				<li><a id="showTortles" href="#" onclick="show(this, 'tortlesList');">Tortle</a></li>
 				<li><a id="showBatiris" href="#" onclick="show(this, 'batirisList');">Batiri</a></li>
+				<li><a id="showGrungs" href="#" onclick="show(this, 'grungsList');">Grung</a></li>
 			</ul>
+		</div>
+		<div id="mainScreen" class="output">
+			<br />
+			<div id="leftFrame">
+				<div>
+					<h1>Cache</h1>
+					<p id="cache"></p>
+				</div>
+				<br />
+				<div>
+					<h1>Treasure Drops</h1>
+					<p id="treasureDrops"></p>
+				</div>
+				<br />
+				<div>
+					<h1>Dead Explorers</h1>
+					<p id="deadExplorers"></p>
+				</div>
+				<br />
+				<div>
+					<h1>Complications</h1>
+					<p id="complications"></p>
+				</div>
+				<br />
+				<div>
+					<h1>Weather Forecast</h1>
+					<p id="weatherForecast"></p>
+				</div>
+				<br />
+				<div>
+					<h1>Nearby there is/are...</h1>
+					<p id="nearbyIs"></p>
+				</div>
+				<br />
+				<div>
+					<h1>If they explore they might find...</h1>
+					<p id="findExplore"></p>
+				</div>
+			</div>
+			<div id="rightFrame">
+				<div id="encounterTable">
+					<h2>Random Trickster God</h2>
+					<p id="tricksterGod"></p>
+					<br />
+					<h2>Random Encounters</h2>
+					<table>
+						<tbody>
+							<tr>
+								<td>Beach</td>
+								<td>Jungle - No Undead</td>
+							</tr>
+							<tr>
+								<td id="beachEncounter"></td>
+								<td id="jungleNoUndeadEncounter"></td>
+							</tr>
+							<tr>
+								<td>Jungle - Lesser Undead</td>
+								<td>Jungle - Greater Undead</td>
+							</tr>
+							<tr>
+								<td id="jungleLesserUndeadEncounter"></td>
+								<td id="jungleGreaterUndeadEncounter"></td>
+							</tr>
+							<tr>
+								<td>Mountains</td>
+								<td>Rivers</td>
+							</tr>
+							<tr>
+								<td id="mountainsEncounter"></td>
+								<td id="riversEncounter"></td>
+							</tr>
+							<tr>
+								<td>Ruins</td>
+								<td>Swamp</td>
+							</tr>
+							<tr>
+								<td id="ruinsEncounter"></td>
+								<td id="swampEncounter"></td>
+							</tr>
+							<tr>
+								<td>Wastelands</td>
+								<td>Omu Ruins</td>
+							</tr>
+							<tr>
+								<td id="wastelandsEncounter"></td>
+								<td id="omuRuinsEncounter"></td>
+							</tr>
+							<tr>
+								<td>Omu Palace</td>
+								<td>Omu Swamp</td>
+							</tr>
+							<tr>
+								<td id="omuPalaceEncounter"></td>
+								<td id="omuSwampEncounter"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 		<div id="humansList" class="output">
 			
@@ -29,6 +130,9 @@
 		
 		</div>
 		<div id="batirisList" class="output">
+		
+		</div>
+		<div id="grungsList" class="output">
 		
 		</div>
 		<script src="scripts/googleSheetsInteraction.js"></script>

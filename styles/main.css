@@ -69,7 +69,18 @@ header {
 	height:60%;
 	margin-left:10px;
 	border-top:5px solid black;
+	display:none;
 
+}
+
+#leftFrame {
+	width:49%;
+	float:left;
+}
+
+#rightFrame {
+	width:49%;
+	float:right;
 }
 
 #menu {

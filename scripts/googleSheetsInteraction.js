@@ -90,6 +90,46 @@ function buildRexExp(corpus) {
 	return regex;
 }
 
+/*
+  ------------------------------------------------------------
+
+	Converts JSON data to a regular corpus object
+	@see sample.json
+
+  ------------------------------------------------------------
+*/
+
+function parseJSON( json ) {
+	
+	var RE_COL = /^gsx\$(.+)$/i;
+
+	var i, n, key, val, map = {}, keys = {}, data = {}, rows = json.feed.entry;
+
+	for ( key in rows[0] ) {
+		if ( RE_COL.test( key ) ) {
+			map[ key ] = key.match( RE_COL )[ 1 ].toLowerCase();
+			keys[ key ] = [];
+		}
+	}
+
+	for ( key in keys ) {
+		
+		data[ map[ key ] ] = keys[ key ];
+
+		for ( i = 0, n = rows.length; i < n; i++ ) {
+
+			val = rows[ i ][ key ].$t;
+
+			if ( val && val.length ) {
+
+				keys[ key ].push( val );
+			}
+		}
+	}
+
+	return data;
+}
+
 function getNPC(npcType, npcData) {
 	var npcAttributes = {};
 	var npc = getNPCData(npcData);

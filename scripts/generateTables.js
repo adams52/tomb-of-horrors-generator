@@ -1,3 +1,67 @@
+function generateMainScreen(rollData, atmosphereData) {
+	var cache = randomItem(rollData["cachestable"]);
+	$("#cache").text(cache);
+	
+	var treasure = randomItem(rollData["treasuredrops"]);
+	$("#treasureDrops").text(treasure);
+	
+	var deadExplorer = randomItem(rollData["deadexplorers"]);
+	$("#deadExplorers").text(deadExplorer);
+	
+	var complication = randomItem(rollData["complications"]);
+	$("#complications").text(complication);
+	
+	var weatherForecast = "Temp: " + randomItem(atmosphereData["chulttemp"]) 
+		+ ". Wind: " + randomItem(atmosphereData["chultwind"]) 
+		+ ". Precipitation: " + randomItem(atmosphereData["chultpercip"]);
+	$("#weatherForecast").text(weatherForecast);
+	
+	var nearbyIs = randomItem(atmosphereData["nearbyterrain"]);
+	$("#nearbyIs").text(nearbyIs);
+	
+	var findExplore = randomItem(atmosphereData["nearbyterrain"]);
+	$("#findExplore").text(findExplore);
+	
+	var tricksterGod = randomItem(rollData["trickstergod"]);
+	$("#tricksterGod").text(tricksterGod);
+	
+	var beachEncounter = randomItem(rollData["beachencounter"]);
+	$("#beachEncounter").text(beachEncounter);
+	
+	var jungleNoUndeadEncounter = randomItem(rollData["junglenoundeadencounter"]);
+	$("#jungleNoUndeadEncounter").text(jungleNoUndeadEncounter);
+	
+	var jungleLesserUndeadEncounter = randomItem(rollData["junglelesserundeadencounter"]);
+	$("#jungleLesserUndeadEncounter").text(jungleLesserUndeadEncounter);
+	
+	var jungleGreaterUndeadEncounter = randomItem(rollData["junglegreaterundeadencounter"]);
+	$("#jungleGreaterUndeadEncounter").text(jungleGreaterUndeadEncounter);
+	
+	var mountainsEncounter = randomItem(rollData["mountainsencounter"]);
+	$("#mountainsEncounter").text(mountainsEncounter);
+	
+	var riversEncounter = randomItem(rollData["riversencounter"]);
+	$("#riversEncounter").text(riversEncounter);
+	
+	var ruinsEncounter = randomItem(rollData["ruinsencounter"]);
+	$("#ruinsEncounter").text(ruinsEncounter);
+	
+	var swampEncounter = randomItem(rollData["swampencounter"]);
+	$("#swampEncounter").text(swampEncounter);
+	
+	var wastelandsEncounter = randomItem(rollData["wastelandsencounter"]);
+	$("#wastelandsEncounter").text(wastelandsEncounter);
+	
+	var omuRuinsEncounter = randomItem(rollData["omuruinsencounter"]);
+	$("#omuRuinsEncounter").text(omuRuinsEncounter);
+	
+	var omuPalaceEncounter = randomItem(rollData["omupalaceencounter"]);
+	$("#omuPalaceEncounter").text(omuPalaceEncounter);
+	
+	var omuSwampEncounter = randomItem(rollData["omuswampencounter"]);
+	$("#omuSwampEncounter").text(omuSwampEncounter);
+}
+
 function generateHumanTable(humans, npcData) {
 	$("#humansList").empty();
 				
@@ -131,4 +195,19 @@ function generateBatiriTable(batiris, npcData) {
 	generateTableRows(10, tableBody, rowItems, batiris, npcData, "batiris");
 	
 	$("#batirisList").append(table);
+}
+
+function generateGrungTable(grungs, npcData) {
+	$("#grungsList").empty();
+	
+	var columnHeaders = ["First Name", "Role", "Color", "Age", "Look", "Trait", "Trait2", "Doesn't like", "Knows about or has history with"];
+	var rowItems = ["name", "role", "color", "age", "appearance", "personality1", "personality2", "hates", "history"];
+	
+	var table = generateTableAndHeaders("grungs", columnHeaders);
+	var tableBody = $(table).find("tbody");
+	var regex = buildRexExp(grungs);
+	
+	generateTableRows(10, tableBody, rowItems, grungs, npcData, "grungs");
+	
+	$("#grungsList").append(table);
 }
