@@ -23,6 +23,7 @@ table {
 th {
 	padding:10px 10px 10px 10px;
 	background-color:blue;
+	color:white;
 	border-left:5px solid black;
 }
 
@@ -35,6 +36,16 @@ tr:nth-child(odd) {
 }
 
 tr:nth-child(even) {
+	background-color:darkgrey;
+}
+
+#encounterTable tr:nth-child(odd) {
+	background-color:blue;
+	color:white;
+	font-weight:bold;
+}
+
+#encounterTable tr:nth-child(even) {
 	background-color:darkgrey;
 }
 
